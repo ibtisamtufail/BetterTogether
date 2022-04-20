@@ -17,33 +17,37 @@ const userSchema = new Schema({
 
     password: {
         type: String,
-        required: true,
         trim: true,
     },
 
     phone: {
         type: String,
         trim: true,
+        default: null
     },
 
     address: {
         type: String,
         trim: true,
+        default: null
     },
 
     country: {
         type: String,
         trim: true,
+        default: null
     },
 
     city: {
         type: String,
         trim: true,
+        default: null
     },
 
     state: {
         type: String,
         trim: true,
+        default: null
     },
 
 }, { timestamps: true });
