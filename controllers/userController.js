@@ -1,6 +1,6 @@
 const userModel = require('../models/userModel');
 const passwordHash = require('password-hash');
-const { TokenResponseFn } = require('../middleware/tokenResponse');
+const { TokenResponseFn } = require('../middleware/response');
 const fetch = require('node-fetch');
 const { OAuth2Client } = require('google-auth-library');
 

@@ -50,6 +50,11 @@ const userSchema = new Schema({
         default: null
     },
 
+    role: {
+        type: String,
+        default: 'user'
+    }
+
 }, { timestamps: true });
 
 module.exports = model('userSchema', userSchema);
