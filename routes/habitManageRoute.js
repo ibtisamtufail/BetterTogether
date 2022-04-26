@@ -3,7 +3,7 @@ const { saveHabitManageDataFn, findAllHabitsManageFn, findAllHabitManageByUserFn
 const { verifyUserTokenFn } = require('../middleware/verifyUserToken');
 
 router.post('/save', verifyUserTokenFn, saveHabitManageDataFn);
-router.get('/getAll', findAllHabitsManageFn);
+router.get('/getAll', verifyUserTokenFn, findAllHabitsManageFn);
 router.get('/getAllByUser', verifyUserTokenFn, findAllHabitManageByUserFn);
 
 module.exports = router;

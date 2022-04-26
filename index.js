@@ -12,14 +12,16 @@ DB();
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json({ extended: false }));
+app.use('/uploads', express.static('uploads'));
 
 // Routes
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
     return res.json({ message: 'Server Running Successfully' });
 });
-app.use("/api/user", require('./routes/userRoute'));
-app.use("/api/habitManage", require('./routes/habitManageRoute'));
-app.use('/api/habit',require('./routes/habitRoute'));
+app.use('/api/user', require('./routes/userRoute'));
+app.use('/api/habitManage', require('./routes/habitManageRoute'));
+app.use('/api/habit', require('./routes/createHabitRoute'));
+app.use('/api/group', require('./routes/groupRoute'));
 
 // Port Listening
 const PORT = process.env.PORT || 5000;

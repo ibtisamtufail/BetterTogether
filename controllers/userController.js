@@ -22,7 +22,7 @@ const registerUserFn = (req, res) => {
             userModel.create(req.body).then(response => {
                 return res.status(200).json(TokenResponseFn(response));
             }).catch(err => {
-                return res.status(400).json({ status: false, message: "Something went wrong" });
+                return res.status(400).json({ status: false, message: 'Something went wrong' });
             });
         }
     });

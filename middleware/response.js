@@ -8,11 +8,11 @@ const TokenResponseFn = (response) => {
     return resObject;
 }
 
-const HabitResponseFn = (response) => {
+const BasicResponseFn = (response, name) => {
     const _data = response.toObject();
-    const { createdAt, updatedAt, __v, ...habit } = _data;
-    const resObject = { status: true, habit };
+    const { createdAt, updatedAt, __v, ...data } = _data;
+    const resObject = { status: true, data };
     return resObject;
 }
 
-module.exports = { TokenResponseFn, HabitResponseFn };
+module.exports = { TokenResponseFn, BasicResponseFn };

@@ -2,85 +2,85 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 const habitManageSchema = new Schema({
 
-    User: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'userSchema'
     },
 
-    Title: {
+    title: {
         type: String,
         trim: true,
         default: null
     },
 
-    Category: {
+    category: {
         type: String,
         trim: true,
         default: null
     },
 
-    Description: {
+    description: {
         type: String,
         trim: true,
         default: null
     },
 
-    AchievingDuration: {
+    achievingDuration: {
         type: String,
         trim: true,
         default: null
     },
 
-    BehaviorCriteria: {
+    behaviorCriteria: {
         type: String,
         trim: true,
         default: null
     },
 
-    Reminders: {
+    reminders: {
         type: Array,
         trim: true,
         default: null
     },
 
-    Trigger: {
+    trigger: {
         type: Array,
         trim: true,
         default: null
     },
 
-    ReportingTime: {
+    reportingTime: {
         type: String,
         trim: true,
         default: null
     },
 
-    DefinitionOfDone: {
+    definitionOfDone: {
         type: Number,
         default: 0
     },
 
-    RefereeDetails: {
+    refereeDetails: {
         type: Object,
         default: null
     },
 
-    Stakes: {
+    stakes: {
         type: Number,
         default: 0
     },
 
-    DonationBodyDetail: {
+    donationBodyDetail: {
         type: String,
         default: null
     },
 
-    Inspiration: {
+    inspiration: {
         type: Schema.Types.ObjectId,
-        ref: "userSchema"
+        ref: 'userSchema'
     },
 
-    ShareWithFriends: {
+    shareWithFriends: {
         type: Array,
         default: null
     },

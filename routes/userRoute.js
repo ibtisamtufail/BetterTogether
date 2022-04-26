@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const { registerUserFn, loginUserFn, googleAuthenticateFn, facebookAuthenticateFn } = require('../controllers/userController');
-const { inputValidation } = require('../middleware/validation');
+const { inputValidationFn } = require('../middleware/validation');
 
-router.post('/register', inputValidation, registerUserFn);
-router.post('/login', inputValidation, loginUserFn);
+router.post('/register', inputValidationFn, registerUserFn);
+router.post('/login', inputValidationFn, loginUserFn);
 router.post('/google', googleAuthenticateFn);
 router.post('/facebook', facebookAuthenticateFn);
 

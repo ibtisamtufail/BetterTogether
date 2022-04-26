@@ -2,22 +2,22 @@ const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 const habitSchema = new Schema({
 
-    User: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'userSchema'
     },
 
-    Title: {
+    title: {
         type: String,
         default: null
     },
 
-    Communities: {
+    communities: {
         type: Array,
         default: null
     },
 
-    Referee: {
+    referee: {
         type: Object,
         default: null
     },

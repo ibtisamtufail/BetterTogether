@@ -6,9 +6,9 @@ const mongoDBConnectFn = () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        console.log("MongoDB Connect Successfully");
+        console.log('MongoDB Connect Successfully');
     } catch (err) {
-        console.log("Error while DB connection");
+        console.log('Error while DB connection');
     }
 }
 

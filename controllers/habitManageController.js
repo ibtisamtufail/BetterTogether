@@ -1,33 +1,30 @@
 const habitManagementModel = require('../models/habitManageModel.js');
-const { HabitResponseFn } = require('../middleware/response');
+const { BasicResponseFn } = require('../middleware/response');
 
 const saveHabitManageDataFn = (req, res) => {
-    req.body.User = req.user;
+    req.body.user = req.user;
     habitManagementModel.create(req.body).then(response => {
-        return res.json(HabitResponseFn(response));
+        return res.json(BasicResponseFn(response));
     }).catch(err => {
         return res.json({ status: false, message: 'Something went wrong' });
     });
 }
 
 const findAllHabitsManageFn = (req, res) => {
-    habitManagementModel.find().populate('User', 'userName email').populate('Inspiration', 'userName email')
-        .select("-createdAt -updatedAt -__v")
+    habitManagementModel.find().populate('user', 'userName email').populate('inspiration', 'userName email')
+        .select('-createdAt -updatedAt -__v')
         .then(response => {
             return res.json(response);
         }).catch(err => {
-            console.log(err.message)
             return res.json({ status: false, message: 'Something went wrong' });
         });
 }
 
 const findAllHabitManageByUserFn = (req, res) => {
-    console.log(req.user);
-    habitManagementModel.find({ User: req.user }).select("-User -createdAt -updatedAt -__v")
+    habitManagementModel.find({ user: req.user }).select('-user -createdAt -updatedAt -__v')
         .then(response => {
             return res.json(response);
         }).catch(err => {
-            console.log(err.message)
             return res.json({ status: false, message: 'Something went wrong' });
         });
 }
