@@ -1,11 +1,16 @@
+require('dotenv').config();
 const express = require('express');
-const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
 const DB = require('./config/database');
-require('dotenv').config();
 
-// DB
+// create server
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const io = require('socket.io')(server);
+
+// Database
 DB();
 
 // Middlewares
@@ -22,7 +27,18 @@ app.use('/api/user', require('./routes/userRoute'));
 app.use('/api/habitManage', require('./routes/habitManageRoute'));
 app.use('/api/habit', require('./routes/createHabitRoute'));
 app.use('/api/group', require('./routes/groupRoute'));
+app.use('/api/message', require('./routes/messageRoute'));
+
+// sockets
+io.on('connection', socket => {
+    socket.on('joinRoom', (groupID) => {
+        socket.join(groupID);
+    });
+    socket.on('chatMessage', (msg, groupID) => {
+        io.to(groupID).emit('message', msg);
+    });
+});
 
 // Port Listening
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server Running On Port ${PORT}`));
+server.listen(PORT, () => console.log(`Server Running On Port ${PORT}`));

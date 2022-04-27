@@ -74,7 +74,7 @@ const groupSchema = new Schema({
     ],
     reports: [
         {
-            user: {
+            member: {
                 type: Schema.Types.ObjectId,
                 ref: 'userSchema'
             },

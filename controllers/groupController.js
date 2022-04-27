@@ -26,8 +26,13 @@ const createNewGroupFn = (req, res) => {
 
 const findAllGroupsFn = (req, res) => {
     groupModel.find()
+        .populate('creator', 'userName email')
         .populate('members.member', 'userName email')
         .populate('referee.member', 'userName email')
+        .populate('stakes.member', 'userName email')
+        .populate('stakesPercentage.member', 'userName email')
+        .populate('thresHold.member', 'userName email')
+        .populate('reports.member', 'userName email')
         .select('-createdAt -updatedAt -__v')
         .then((groups) => {
             return res.json({ status: true, groups });
@@ -103,12 +108,11 @@ const addMemberStakesFn = (req, res) => {
     groupModel.findOne({ 'stakes.member': req.user, 'stakesPercentage.member': req.user })
         .then((response) => {
             if (response) {
-                Query = { $pull: { stakes, stakesPercentage } };
+                Query = { $set: { stakes, stakesPercentage } };
             }
             else {
                 Query = { $push: { stakes, stakesPercentage } };
             }
-
             groupModel.findOneAndUpdate(
                 { _id: groupID }, Query, { new: true }).then((response) => {
                     return res.json(BasicResponseFn(response));
@@ -130,12 +134,11 @@ const addThresholdFn = (req, res) => {
     groupModel.findOne({ 'thresHold.member': req.user })
         .then((response) => {
             if (response) {
-                Query = { $pull: { thresHold} };
+                Query = { $set: { thresHold } };
             }
             else {
                 Query = { $push: { thresHold } };
             }
-
             groupModel.findOneAndUpdate(
                 { _id: groupID }, Query, { new: true }).then((response) => {
                     return res.json(BasicResponseFn(response));
@@ -148,6 +151,20 @@ const addThresholdFn = (req, res) => {
         });
 }
 
+const addGroupReportFn = (req, res) => {
+    const { groupID, report } = req.body;
+
+    groupModel.findOneAndUpdate(
+        { _id: groupID },
+        { $push: { reports: { member: req.user, report } } },
+        { new: true }
+    ).then((response) => {
+        return res.json({ status: true, data: response });
+    }).catch((err) => {
+        return res.json({ status: false, message: 'Something went wrong' });
+    });
+}
+
 module.exports =
 {
     createNewGroupFn,
@@ -156,5 +173,6 @@ module.exports =
     addGroupMembersFn,
     addGroupRefereeFn,
     addMemberStakesFn,
-    addThresholdFn
+    addThresholdFn,
+    addGroupReportFn
 };

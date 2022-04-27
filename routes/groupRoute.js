@@ -9,7 +9,8 @@ const {
     addGroupMembersFn,
     addGroupRefereeFn,
     addMemberStakesFn,
-    addThresholdFn
+    addThresholdFn,
+    addGroupReportFn
 } = require('../controllers/groupController');
 
 // Multer for Profile Upload
@@ -46,5 +47,6 @@ router.put('/addMembers', verifyUserTokenFn, addGroupMembersFn);
 router.put('/addReferee', verifyUserTokenFn, addGroupRefereeFn);
 router.put('/addStakes', verifyUserTokenFn, addMemberStakesFn);
 router.put('/addThreshold', verifyUserTokenFn, addThresholdFn);
+router.put('/addReport', verifyUserTokenFn, addGroupReportFn);
 
 module.exports = router;
