@@ -6,8 +6,7 @@ const DB = require('./config/database');
 
 // create server
 const app = express();
-const http = require('http');
-const server = http.createServer(app);
+const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 
 // Database
@@ -28,6 +27,7 @@ app.use('/api/habitManage', require('./routes/habitManageRoute'));
 app.use('/api/habit', require('./routes/createHabitRoute'));
 app.use('/api/group', require('./routes/groupRoute'));
 app.use('/api/message', require('./routes/messageRoute'));
+app.use('/api/funds', require('./routes/fundsRoute'));
 
 // sockets
 io.on('connection', socket => {
